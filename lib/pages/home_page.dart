@@ -1,105 +1,78 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:trilhaapp/service/num_alet.dart';
+import 'package:trilhaapp/pages/card_page.dart';
+import 'package:trilhaapp/pages/image_assets.dart';
+import 'package:trilhaapp/pages/list_view_h.dart';
+import 'package:trilhaapp/pages/list_view_v.dart';
+import 'package:trilhaapp/pages/tarefa_page.dart';
+import 'package:trilhaapp/pages/consulta_cep.dart';
+import 'package:trilhaapp/widgets/custom_drawer.dart';
 
-class PaginaInicial extends StatefulWidget {
-  const PaginaInicial({super.key});
+class MainPage extends StatefulWidget {
+  const MainPage({super.key});
 
   @override
-  State<PaginaInicial> createState() => _PaginaInicialState();
+  State<MainPage> createState() => _MainPageState();
 }
 
-class _PaginaInicialState extends State<PaginaInicial> {
-  var numeroGerado = 0;
-  var quantidadeCliques = 0;
+class _MainPageState extends State<MainPage> {
+  // Índice da página atual
+  int _currentPageIndex = 0;
 
+  // Lista de páginas que serão exibidas
+  final List<Widget> _pages = [
+    CardPage(),
+    ImageAssetsPage(),
+    ListViewV(),
+    ListViewH(),
+    TarefaPage(),
+    ConsultaCep(),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Meu teste app",
-         // style: GoogleFonts.pacifico(),
-          ),
-      ),
-      body: Container(
-        width: double.infinity,
-        margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(
-              width: 100,
-              height: 100,
-              child: Container(
-                color: Colors.cyan,
-                child: Text("Ações do usuário",
-                    style: GoogleFonts.acme(fontSize: 20)
-                ),
-              ),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Meu App"),
+        ),
+        drawer: CustomDrawer(),
+        body: _pages[_currentPageIndex], // Exibe a página atual
+        bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+          currentIndex: _currentPageIndex, // Índice da página atual
+          onTap: (index) {
+            // Atualiza o estado quando um item é selecionado
+            setState(() {
+              _currentPageIndex = index;
+            });
+          },
+          items: const [
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Página 1',
             ),
-            Container(
-              width: double.infinity,
-              color: Colors.yellow,
-              child: Text("Foi clicado $quantidadeCliques vezes",
-                  style: GoogleFonts.acme(fontSize: 20)
-              ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.list),
+              label: 'Página 2',
             ),
-            Container(
-              width: double.infinity,
-              color: Colors.deepOrangeAccent,
-              child: Text("O número gerado foi: $numeroGerado",
-                  style: GoogleFonts.acme(fontSize: 20)
-                ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.monitor),
+              label: 'Página 3',
             ),
-            Expanded(
-              child: Container(
-                color: Colors.green,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      color: Colors.red,
-                      child: Text("Nome: ",
-                          style: GoogleFonts.acme(fontSize: 20)
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      color: Colors.yellow,
-                      child: Text("Germano Coelho",
-                          style: GoogleFonts.acme(fontSize: 20)
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      color: Colors.blue,
-                      child: Text("30",
-                          style: GoogleFonts.acme(fontSize: 20)
-                      ),
-                    ),
-                  ),
-                ],),
-              ),
-            )
+            BottomNavigationBarItem(
+              icon: Icon(Icons.monitor),
+              label: 'Página 4',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.work),
+              label: 'Tarefas',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.http),
+              label: 'HTTP',
+            ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            quantidadeCliques++;
-            numeroGerado =  GeradorNumAlet.gerarUmNumeroAle(10);
-          });
-        },
-        child: const Icon(Icons.add_circle),
       ),
     );
   }
