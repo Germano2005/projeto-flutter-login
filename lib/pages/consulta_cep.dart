@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/model/viacep_model.dart';
-import 'package:trilhaapp/repositories/via_cep_repository.dart';
+import 'package:trilhaapp/repositories/http/via_cep_repository.dart';
 
 class ConsultaCep extends StatefulWidget {
   const ConsultaCep({super.key});

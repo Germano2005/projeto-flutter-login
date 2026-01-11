@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:trilhaapp/model/comment_model.dart';
 import 'package:trilhaapp/repositories/comments_repository.dart';
+import 'package:trilhaapp/repositories/dio/comments_dio_repository.dart';
 
 class CommentsPage extends StatefulWidget {
   final int postId;
@@ -12,7 +13,7 @@ class CommentsPage extends StatefulWidget {
 
 class _CommentsPageState extends State<CommentsPage> {
 
-  var commentsRepository = CommentsRepository();
+  CommentsRepository commentsRepository = CommentsDioRepository();
   var comments = <CommentModel>[];
 
   @override
@@ -53,8 +54,8 @@ class _CommentsPageState extends State<CommentsPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Nome: ${comment.name.substring(0, 6)}", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),),
-                            Text("Email: ${comment.email}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),),
+                            Text("Nome: ${comment.name.substring(0, 6)}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),),
+                            Text("Email: ${comment.email}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
                           ],
                         ),
                         SizedBox(
