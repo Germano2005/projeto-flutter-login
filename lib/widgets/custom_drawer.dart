@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/pages/num_alet_page.dart';
 import 'package:trilhaapp/pages/posts_page.dart';
 
 import '../pages/dados_cadastrais.dart';
@@ -135,6 +136,29 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (bc) => PostsPage()));
+            },
+          ),
+          Divider(),
+          SizedBox(
+            height: 10,
+          ),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Icon(Icons.numbers),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text("Numeros"),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (bc) => NumAletPage()));
             },
           ),
           Divider(),
