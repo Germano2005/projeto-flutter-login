@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:trilhaapp/pages/configuracoes_page.dart';
 import 'package:trilhaapp/pages/num_alet_page.dart';
 import 'package:trilhaapp/pages/posts_page.dart';
 
@@ -159,6 +160,29 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (bc) => NumAletPage()));
+            },
+          ),
+          Divider(),
+          SizedBox(
+            height: 10,
+          ),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Icon(Icons.settings),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text("Configurações"),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (bc) => ConfiguracoesPage()));
             },
           ),
           Divider(),

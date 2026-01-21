@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:trilhaapp/repositories/linguagens_repository.dart';
 import 'package:trilhaapp/repositories/nivel_repository.dart';
 import 'package:trilhaapp/widgets/text_label.dart';
@@ -11,6 +12,9 @@ class MeusDados extends StatefulWidget {
 }
 
 class _MeusDadosState extends State<MeusDados> {
+
+  late SharedPreferences storage;
+
   var nomeController = TextEditingController(text: "");
   var dataNascController = TextEditingController(text: "");
   DateTime? dataNascimento;
@@ -18,10 +22,17 @@ class _MeusDadosState extends State<MeusDados> {
   var linguagensRepository = LinguagensRepository();
   var niveis = [];
   var linguagens = [];
-  var linguagensSelecionadas = [];
+  List<String> linguagensSelecionadas = [];
   String nivelSelecionado = ""; // Mude para não-nulo com valor inicial
   double salarioEscolhido = 1000;
   int tempoExperiencia = 0;
+
+  final String CHAVE_NOME_CADASTRO = "nome_cadastro";
+  final String CHAVE_DATA_NASCIMENTO_CADASTRO = "data_nascimento_cadastro";
+  final String CHAVE_NIVEL_CADASTRO = "nivel_cadastro";
+  final String CHAVE_LINGUAGEM_CADASTRO = "linguagem_cadastro";
+  final String CHAVE_TEMPO_CADASTRO = "tempo_cadastro";
+  final String CHAVE_SALARIO_CADASTRO = "salario_cadastro";
 
   @override
   void initState() {
@@ -32,6 +43,20 @@ class _MeusDadosState extends State<MeusDados> {
     }
     linguagens = linguagensRepository.linguagens();
     super.initState();
+    carregarDados();
+  }
+
+  void carregarDados() async{
+    storage = await SharedPreferences.getInstance();
+
+    setState(() {
+      nomeController.text = storage.getString(CHAVE_NOME_CADASTRO) ?? "";
+      dataNascController.text = storage.getString(CHAVE_DATA_NASCIMENTO_CADASTRO) ?? "";
+      nivelSelecionado = storage.getString(CHAVE_NIVEL_CADASTRO) ?? "";
+      linguagensSelecionadas = storage.getStringList(CHAVE_LINGUAGEM_CADASTRO) ?? [];
+      tempoExperiencia = storage.getInt(CHAVE_TEMPO_CADASTRO) ?? 0;
+      salarioEscolhido = storage.getDouble(CHAVE_SALARIO_CADASTRO) ?? 0.0;
+    });
   }
 
   List<DropdownMenuItem<int>> retornoItens(int qtdMax){
@@ -136,13 +161,15 @@ class _MeusDadosState extends State<MeusDados> {
             }),
             Center(
               child: ElevatedButton(
-                onPressed: () {
-                  debugPrint("Nome: ${nomeController.text}");
-                  debugPrint("Data de Nascimento: $dataNascimento");
-                  debugPrint("Nível selecionado: $nivelSelecionado");
-                  debugPrint("Linguagens preferidas: $linguagensSelecionadas");
-                  debugPrint("Tempo de experiência: $tempoExperiencia");
-                  debugPrint("Pretenção salarial: $salarioEscolhido");
+                onPressed: () async{
+                  await storage.setString(CHAVE_NOME_CADASTRO, nomeController.text);
+                  await storage.setString(CHAVE_DATA_NASCIMENTO_CADASTRO, dataNascimento.toString());
+                  await storage.setString(CHAVE_NIVEL_CADASTRO, nivelSelecionado);
+                  await storage.setStringList(CHAVE_LINGUAGEM_CADASTRO, linguagensSelecionadas);
+                  await storage.setInt(CHAVE_TEMPO_CADASTRO, tempoExperiencia);
+                  await storage.setDouble(CHAVE_SALARIO_CADASTRO, salarioEscolhido);
+
+                  Navigator.pop(context);
                 },
                 child: const Text("Salvar"),
               ),
