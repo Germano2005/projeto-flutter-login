@@ -3,6 +3,7 @@ import 'package:trilhaapp/pages/card_page.dart';
 import 'package:trilhaapp/pages/image_assets.dart';
 import 'package:trilhaapp/pages/list_view_h.dart';
 import 'package:trilhaapp/pages/list_view_v.dart';
+import 'package:trilhaapp/pages/tarefa_SQLite_page.dart';
 import 'package:trilhaapp/pages/tarefa_page.dart';
 import 'package:trilhaapp/pages/consulta_cep.dart';
 import 'package:trilhaapp/widgets/custom_drawer.dart';
@@ -24,7 +25,7 @@ class _MainPageState extends State<MainPage> {
     ImageAssetsPage(),
     ListViewV(),
     ListViewH(),
-    TarefaPage(),
+    TarefaSQLitePage(),
     ConsultaCep(),
   ];
 
