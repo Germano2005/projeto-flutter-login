@@ -40,22 +40,22 @@ class _CommentsPageState extends State<CommentsPage> {
             centerTitle: true,
           ),
           body: Container(
-            margin: EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
             child: ListView.builder(
               itemCount: comments.length,
                 itemBuilder: (_, index){
               var comment = comments[index];
               return Card(
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                    padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Nome: ${comment.name.substring(0, 6)}", style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),),
-                            Text("Email: ${comment.email}", style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700),),
+                            Text("Nome: ${comment.name.substring(0, 6)}", style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700),),
+                            Text("Email: ${comment.email}", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w700),),
                           ],
                         ),
                         SizedBox(

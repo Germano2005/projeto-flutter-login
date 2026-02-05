@@ -12,8 +12,7 @@ class CustomDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: ListView(
         children: [
           InkWell(
             onTap: (){
@@ -131,6 +130,25 @@ class CustomDrawer extends StatelessWidget {
                     width: 10,
                   ),
                   Text("Posts"),
+                ],
+              ),
+            ),
+            onTap: () {
+              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(builder: (bc) => PostsPage()));
+            },
+          ),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Icon(Icons.task),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text("Tarefas HTTP"),
                 ],
               ),
             ),
