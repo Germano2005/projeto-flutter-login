@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:trilhaapp/pages/configuracoes_page.dart';
 import 'package:trilhaapp/pages/num_alet_page.dart';
 import 'package:trilhaapp/pages/posts_page.dart';
+import 'package:trilhaapp/pages/tarefa_http_page.dart';
+import 'package:trilhaapp/repositories/back4app/tarefas_back4app_repository.dart';
 
 import '../pages/dados_cadastrais.dart';
 import 'package:trilhaapp/pages/login_page.dart';
@@ -138,25 +140,6 @@ class CustomDrawer extends StatelessWidget {
               Navigator.push(context, MaterialPageRoute(builder: (bc) => PostsPage()));
             },
           ),
-          InkWell(
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              width: double.infinity,
-              child: Row(
-                children: [
-                  Icon(Icons.task),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  Text("Tarefas HTTP"),
-                ],
-              ),
-            ),
-            onTap: () {
-              Navigator.pop(context);
-              Navigator.push(context, MaterialPageRoute(builder: (bc) => PostsPage()));
-            },
-          ),
           Divider(),
           SizedBox(
             height: 10,
@@ -201,6 +184,30 @@ class CustomDrawer extends StatelessWidget {
             onTap: () {
               Navigator.pop(context);
               Navigator.push(context, MaterialPageRoute(builder: (bc) => ConfiguracoesPage()));
+            },
+          ),
+          Divider(),
+          SizedBox(
+            height: 10,
+          ),
+          InkWell(
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              width: double.infinity,
+              child: Row(
+                children: [
+                  Icon(Icons.task),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text("TAREFAS HTTP"),
+                ],
+              ),
+            ),
+            onTap: () async{
+              Navigator.pop(context);
+
+              Navigator.push(context, MaterialPageRoute(builder: (bc) => TarefaHttpPage()));
             },
           ),
           Divider(),

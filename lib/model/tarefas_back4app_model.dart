@@ -2,6 +2,7 @@ class TarefasBack4appModel {
   List<Tarefa> tarefas = [];
 
   TarefasBack4appModel(this.tarefas);
+  
 
   TarefasBack4appModel.fromJson(Map<String, dynamic> json) {
     if (json['results'] != null) {
@@ -14,7 +15,7 @@ class TarefasBack4appModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['results'] = tarefas.map((v) => v.toJson()).toList();
+    data['results'] = tarefas.map((v) => v.toCreateJson()).toList();
       return data;
   }
 }
@@ -26,12 +27,15 @@ class Tarefa {
   String createdAt = "";
   String updatedAt = "";
 
+
   Tarefa(
       this.objectId,
         this.descricao,
         this.concluido,
         this.createdAt,
         this.updatedAt);
+
+  Tarefa.criar(this.descricao, this.concluido);
 
   Tarefa.fromJson(Map<String, dynamic> json) {
     objectId = json['objectId'];
@@ -41,13 +45,10 @@ class Tarefa {
     updatedAt = json['updatedAt'];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toCreateJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['objectId'] = objectId;
     data['descricao'] = descricao;
     data['concluido'] = concluido;
-    data['createdAt'] = createdAt;
-    data['updatedAt'] = updatedAt;
     return data;
   }
 }
